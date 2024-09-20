@@ -1,0 +1,60 @@
+﻿{% extends 'pages/base.html' %}
+
+<title>{% block title %}Welcome{% endblock %}</title>
+
+{% block content %}
+  <div class="mt-6 px-6 py-12 bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl shadow-lg">
+    <h2 class="mb-12 text-3xl text-center font-bold text-gray-800">Newest Items</h2>
+
+    <div class="grid grid-cols-4 sm:grid-cols-4 md:grid-cols-4 gap-6">
+        {% for item in items %}
+            <div class="relative transform hover:scale-105 transition-transform duration-300">
+                <a href="{% url 'item:detail' item.id %}" class="block bg-white rounded-xl shadow-md overflow-hidden">
+                    <div>
+                        {% if item.images.all %}
+                            <img src="{{ item.images.first.image.url }}" class="rounded-t-xl w-full h-64 object-cover">
+                        {% else %}
+                            <img src="path/to/default/image.jpg" class="rounded-t-xl w-full h-64 object-cover">
+                        {% endif %}
+                    </div>
+
+                    <div class="p-6 group">
+                        <!-- Adjusted item name styling -->
+                        {% if item.name|length < 23 %}
+                                <h2 class="text-2xl font-semibold text-gray-800 mb-1 group-hover:whitespace-normal overflow-visible duration-300" style="height: 2.5rem;">
+                                    {{ item.name }}
+                                </h2>
+                            {% else %}
+                                <h2 class="text-2xl font-semibold text-gray-800 mb-1 overflow-hidden overflow-ellipsis whitespace-nowrap group-hover:whitespace-normal group-hover:overflow-visible group-hover:mb-6 duration-300" style="height: 2.5rem;">
+                                    {{ item.name }}
+                                </h2>
+                            {% endif %}
+                        <p class="text-lg text-gray-600">Price: <span class="text-teal-600 font-bold">{{ item.price }}$</span></p>
+                    </div>
+                    
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+  </div>
+
+  <!-- Optional Categories Section -->
+  <!-- 
+  <div class="mt-12 px-6 py-12 bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl shadow-lg">
+    <h2 class="mb-12 text-3xl text-center font-bold text-gray-800">Categories</h2>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        {% for category in categories %}
+        <div class="relative transform hover:scale-105 transition-transform duration-300">
+            <a href="#" class="block bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="p-6">
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-2">{{ category.name }}</h2>
+                    <p class="text-lg text-gray-600">Items: <span class="text-teal-600 font-bold">{{ category.items.count }}</span></p>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+  </div> 
+  -->
+{% endblock %}
