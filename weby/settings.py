@@ -32,7 +32,9 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
 ]
 
-
+CSRF_TRUSTED_ORIGINS = [
+    'https://web-production-f4b2.up.railway.app',  # Add your production URL here
+]
 
 
 LOGIN_URL = '/weby/login/'
