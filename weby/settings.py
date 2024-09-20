@@ -25,7 +25,12 @@ SECRET_KEY = 'django-insecure-7k#o2^65+o)g@7314klm7cg#wo7)ra-^u3iiri86qk)t)=dzds
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'web-production-53c56.up.railway.app',
+    'localhost',  # Add this if you're testing locally too
+    '127.0.0.1',  # Add this as well for local development
+]
+
 
 
 LOGIN_URL = '/weby/login/'
