@@ -3,27 +3,24 @@
 {% block content %}
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6 px-6 py-12 bg-gray-200 rounded-xl">
     <!-- Swiper Container for Images -->
-  
+    <div class="col-span-1 bg-white mb-12 pb-20 rounded-xl overflow-hidden shadow-lg">
+        <swiper-container pagination="true" pagination-dynamic-bullets="true" loop="true" autoplay="true">
+            {% if item.images.all %}
+                {% for image in item.images.all %}
+                    <swiper-slide>
+                        <img src="{{ image.image.url }}" class="w-full h-64 object-contain">
+                    </swiper-slide>
+                {% endfor %}
+            {% else %}
+                <swiper-slide>
+                    <p class="text-center text-gray-500">No images available</p>
+                </swiper-slide>
+            {% endif %}
+        </swiper-container>
+    </div>
 
     <!-- Item Details -->
-    <div class="col-span-2 bg-white rounded-xl p-6 shadow-lg">
-
-        <div class="col-span-1 bg-white mb-12 pb-20 rounded-xl overflow-hidden shadow-lg ">
-            <swiper-container pagination="true" pagination-dynamic-bullets="true" loop="true" autoplay="true">
-                {% if item.images.all %}
-                    {% for image in item.images.all %}
-                        <swiper-slide>
-                            <img src="{{ image.image.url }}" class="w-full h-64 object-contain" >
-                        </swiper-slide>
-                    {% endfor %}
-                {% else %}
-                    <swiper-slide>
-                        <p class="text-center text-gray-500">No images available</p>
-                    </swiper-slide>
-                {% endif %}
-            </swiper-container>
-        </div>
-
+    <div class="col-span-1 bg-white rounded-xl p-6 shadow-lg">
         <h1 class="text-3xl font-bold text-teal-600 mb-4">{{ item.name }}</h1>
         <p class="text-gray-700 mb-4"><strong>Price: </strong>{{ item.price }}$</p>
         <p class="text-gray-700 mb-4"><strong>Seller: </strong>{{ item.created_by.username }}</p>
@@ -37,7 +34,6 @@
 
         {% if request.user == item.created_by %}
         <div class="mt-6 bg-gray-100 p-4 rounded-xl">
-            <!-- <p class="text-gray-800 mb-4">This is your item!</p> -->
             <a href="{% url 'item:edit' item.id %}" class="inline-block px-6 py-2 text-lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-600 transition">Edit</a>
             <a href="{% url 'item:delete' item.id %}" class="inline-block px-6 py-2 text-lg font-semibold bg-red-500 text-white rounded-xl hover:bg-red-600 transition ml-4">Delete</a>
         </div>
@@ -92,10 +88,8 @@
     const swiperContainer = document.querySelector('swiper-container');
 
     showMoreButton.addEventListener('click', () => {
-        // Replace related_items|slice:":6" with all related items.
-        // This is just a placeholder; you'll need to implement fetching more items dynamically.
-        // For example, you might use AJAX to fetch and append more related items to the swiper-container.
         console.log('Show More clicked'); // Placeholder action
+        // You may implement fetching more items dynamically here.
     });
 </script>
 {% endblock %}
