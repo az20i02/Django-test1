@@ -27,9 +27,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'web-production-53c56.up.railway.app',
-    'localhost',  # Add this if you're testing locally too
-    '127.0.0.1',  # Add this as well for local development
+    'web-production-f4b2.up.railway.app',  # Add this line
+    'localhost',
+    '127.0.0.1',
 ]
+
 
 
 
